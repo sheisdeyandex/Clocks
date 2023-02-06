@@ -2,31 +2,80 @@ package com.clock.clocks.ui.fragments
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import com.clock.clocks.R
+import androidx.lifecycle.lifecycleScope
+import com.clock.clocks.databinding.FragmentMainBinding
+import com.clock.clocks.ui.presentation.BaseFragment
+import com.clock.clocks.viewmodels.MainClockViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class MainClockFragment : Fragment() {
+@AndroidEntryPoint
+class MainClockFragment :BaseFragment<FragmentMainBinding> (FragmentMainBinding::inflate){
 
     companion object {
         fun newInstance() = MainClockFragment()
     }
 
-    private lateinit var viewModel: MainClockViewModel
+    private  val viewModel: MainClockViewModel
+            by lazy {
+                ViewModelProvider(requireActivity())[MainClockViewModel::class.java]
+            }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View? {
-        return inflater.inflate(R.layout.fragment_main_clock, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        lifecycleScope.launch {
+            withContext(Dispatchers.IO){
+                insertDefault()
+            }
+            withContext(Dispatchers.IO){
+                getSettings()
+            }
+        }
+
+
     }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MainClockViewModel::class.java)
-        // TODO: Use the ViewModel
+    fun getSettings(){
+        val id = viewModel.getId()
+        viewModel.getColor(id)
+        viewModel.getSetLanguageModel(id)
+        viewModel.getClockAppearance(id)
+        viewModel.getUse24HourFormat(id)
+        viewModel.getAutomaticallyHideModel(id)
+        viewModel.getClockOrientation(id)
+        viewModel.getDateFormatModel(id)
+        viewModel.getHideStatusBarModel(id)
+        viewModel.getNightModeModel(id)
+        viewModel.getSeparatorStyle(id)
+        viewModel.getShowDateModel(id)
+        viewModel.getShowDayNameModel(id)
+        viewModel.getShowDayModel(id)
+        viewModel.getShowLeadingZeroForHoursModel(id)
+        viewModel.getShowWeatherStyleInformationModel(id)
+        viewModel.getWhenPortraitModeModel(id)
+        viewModel.getShowSecondsModel(id)
+        viewModel.getBackground(id)
     }
-
+    fun insertDefault(){
+        viewModel.generateColor()
+        viewModel.generateBackground()
+        viewModel.generateClockOrientation()
+        viewModel.generateClockAppearance()
+        viewModel.generateAutomaticallyHideModel()
+        viewModel.generateSeparatorStyle()
+        viewModel.generateDateFormatModel()
+        viewModel.generateHideStatusBarModel()
+        viewModel.generateNightModeModel()
+        viewModel.generateSetLanguageModel()
+        viewModel.generateShowDateModel()
+        viewModel.generateShowDayNameModel()
+        viewModel.generateShowLeadingZeroForHoursModel()
+        viewModel.generateShowDayModel()
+        viewModel.generateWhenPortraitModeModel()
+        viewModel.generateShowWeatherStyleInformationModel()
+        viewModel.generateUse24HourFormat()
+        viewModel.generateShowSecondsModel()
+    }
 }

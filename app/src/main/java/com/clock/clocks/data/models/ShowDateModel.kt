@@ -2,9 +2,9 @@ package com.clock.clocks.data.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-
 @Entity
-data class ClockOrientation (
+data class ShowDateModel(
     @PrimaryKey(autoGenerate = true)
-    val id:Int,
-    val orientation:String)
+    val id: Int,
+    val showDateModel: Boolean
+)
