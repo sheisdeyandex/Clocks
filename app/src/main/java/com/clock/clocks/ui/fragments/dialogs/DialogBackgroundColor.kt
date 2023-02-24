@@ -12,13 +12,15 @@ import android.widget.RadioButton
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import com.clock.clocks.R
+import com.clock.clocks.databinding.DialogBackgroundBinding
 import com.clock.clocks.databinding.DialogClockColorBinding
+import com.clock.clocks.domain.IBackgroundColor
 import com.clock.clocks.domain.IClockColor
 import com.clock.clocks.domain.RandomHexColor
 
 
-class DialogClockColor(val clockColorInterface:IClockColor):DialogFragment() {
-    lateinit var binding: DialogClockColorBinding
+class DialogBackgroundColor(val clockColorInterface:IBackgroundColor):DialogFragment() {
+    lateinit var binding: DialogBackgroundBinding
     private val customColorDialog by lazy {
         DialogClockCustomColor()
     }
@@ -34,13 +36,13 @@ class DialogClockColor(val clockColorInterface:IClockColor):DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        binding = DialogClockColorBinding.inflate(inflater, container,false)
+        binding = DialogBackgroundBinding.inflate(inflater, container,false)
         dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
         val wmlp = dialog?.window?.attributes
         wmlp?.gravity = Gravity.CENTER
         wmlp?.y = 100
         dialog?.setCanceledOnTouchOutside(true)
-        binding.rbRed.isChecked = true
+        binding.rbBlack.isChecked = true
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         return binding.root
     }
@@ -52,7 +54,7 @@ class DialogClockColor(val clockColorInterface:IClockColor):DialogFragment() {
             when {
                 binding.rbCustomColor.isChecked ->customColorDialog.show(parentFragmentManager, "")
                 binding.rbManualHexColor.isChecked ->""
-                else-> clockColorInterface.getColorColor(getColor().first,getColor().second)
+                else-> clockColorInterface.getBackground(getColor().first,getColor().second)
             }
             dismiss()
         }
@@ -60,14 +62,10 @@ class DialogClockColor(val clockColorInterface:IClockColor):DialogFragment() {
     }
     private fun getColor():Pair<String,String>{
         return when{
-            binding.rbRed.isChecked -> Pair(Integer.toHexString(ContextCompat.getColor(requireContext(), R.color.red)).substring(2).uppercase(),requireContext().getString(R.string.red))
-            binding.rbGreen.isChecked ->Pair( Integer.toHexString(ContextCompat.getColor(requireContext(), R.color.green)).substring(2).uppercase(),requireContext().getString(R.string.green))
-            binding.rbYellow.isChecked ->Pair( Integer.toHexString(ContextCompat.getColor(requireContext(), R.color.yellow)).substring(2).uppercase(),requireContext().getString(R.string.yellow))
-            binding.rbBlue.isChecked ->Pair( Integer.toHexString(ContextCompat.getColor(requireContext(), R.color.blue)).substring(2).uppercase(),requireContext().getString(R.string.blue))
-            binding.rbFuchsia.isChecked ->Pair( Integer.toHexString(ContextCompat.getColor(requireContext(), R.color.fuchsia)).substring(2).uppercase(),requireContext().getString(R.string.fuchsia))
-            binding.rbWhite.isChecked ->Pair( Integer.toHexString(ContextCompat.getColor(requireContext(), R.color.white)).substring(2).uppercase(),requireContext().getString(R.string.white))
-            binding.rbLightBlue.isChecked ->Pair( Integer.toHexString(ContextCompat.getColor(requireContext(), R.color.light_blue)).substring(2).uppercase(),requireContext().getString(R.string.light_blue))
-            binding.rbRandom.isChecked ->Pair( RandomHexColor.getRandomHexColor(),requireContext().getString(R.string.random))
+            binding.rbBlack.isChecked -> Pair(Integer.toHexString(ContextCompat.getColor(requireContext(), R.color.black)).substring(2).uppercase(),requireContext().getString(R.string.red))
+            binding.rbCustomColor.isChecked ->Pair( Integer.toHexString(ContextCompat.getColor(requireContext(), R.color.green)).substring(2).uppercase(),requireContext().getString(R.string.green))
+            binding.rbManualHexColor.isChecked ->Pair( Integer.toHexString(ContextCompat.getColor(requireContext(), R.color.yellow)).substring(2).uppercase(),requireContext().getString(R.string.yellow))
+            binding.rbGallery.isChecked ->Pair( Integer.toHexString(ContextCompat.getColor(requireContext(), R.color.blue)).substring(2).uppercase(),requireContext().getString(R.string.blue))
             else ->  Pair(Integer.toHexString(ContextCompat.getColor(requireContext(), R.color.red)).substring(2).uppercase(),requireContext().getString(R.string.red))
         }
     }

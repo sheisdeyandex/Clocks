@@ -6,4 +6,7 @@ import androidx.room.PrimaryKey
 data class ClockFontModel(
     @PrimaryKey(autoGenerate = true)
     val id:Int,
-    val font:String)
+    val font:Int,
+    val name:String,
+    val applyToClockOnly:Boolean
+    )

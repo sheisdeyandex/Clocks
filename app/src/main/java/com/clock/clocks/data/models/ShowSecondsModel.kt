@@ -6,5 +6,5 @@ import androidx.room.PrimaryKey
 data class ShowSecondsModel(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
-    val showSecondsModel: Boolean
+    val showSeconds: Boolean
 )

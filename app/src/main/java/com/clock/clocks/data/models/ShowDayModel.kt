@@ -6,5 +6,5 @@ import androidx.room.PrimaryKey
 data class ShowDayModel(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
-    val showDateModel: Boolean
+    val showDay: Boolean
 )

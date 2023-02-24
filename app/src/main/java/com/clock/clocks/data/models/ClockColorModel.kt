@@ -7,5 +7,6 @@ import androidx.room.PrimaryKey
 data class ClockColorModel(
     @PrimaryKey(autoGenerate = true)
     val id:Int,
-    val clockColor: String
+    val clockColor: String,
+    val name:String
     )

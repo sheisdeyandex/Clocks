@@ -1,13 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/clMain"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragments.MainClockFragment">
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glDate"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        app:layout_constraintGuide_percent="0.15"
+        android:orientation="horizontal"
+        />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glClock"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        app:layout_constraintGuide_percent="0.75"
+        android:orientation="horizontal"
+        />
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:id="@+id/tvDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/glDate"
+        android:textSize="24sp"
 
-</FrameLayout>
+        />
+    <TextClock
+        android:id="@+id/tvClockHour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/glClock"
+        android:textSize="@dimen/clock_size_160"
+        android:timeZone="Asia/Tashkent"
+        android:textAlignment="center"
+        />
+    <TextClock
+        android:id="@+id/tvSeconds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@+id/tvClockHour"
+        app:layout_constraintBottom_toBottomOf="@+id/glClock"
+        android:textSize="40sp"
+        android:layout_marginBottom="30sp"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>

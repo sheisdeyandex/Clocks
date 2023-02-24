@@ -6,5 +6,5 @@ import androidx.room.PrimaryKey
 data class ClockAppearanceModel(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
-    val clockAppearanceModel: Boolean
+    val clockAppearance: Boolean
 )

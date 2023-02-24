@@ -53,4 +53,21 @@
     <string name="ok">Ok</string>
     <string name="cancel">Cancel</string>
     <string name="Create">Create</string>
+    <string name="black">Black</string>
+    <string name="gallery">Gallery</string>
+    <string name="web">Web</string>
+    <string name="default_name">Default</string>
+    <string name="old">Old</string>
+    <string name="thick">Thick</string>
+    <string name="ubuntu">Ubuntu</string>
+    <string name="android">Android</string>
+    <string name="Snipper">Snipper</string>
+    <string name="courier">Courier</string>
+    <string name="seven_segments">Seven segments</string>
+    <string name="roboto">Roboto</string>
+    <string name="roboto2">Roboto 2</string>
+    <string name="applyToClockOnly">Apply to clock only</string>
+    <string name="landscape">Landscape</string>
+    <string name="portrait">Portrait</string>
+    <string name="automatic">Automatic</string>
 </resources>

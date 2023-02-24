@@ -6,5 +6,5 @@ import androidx.room.PrimaryKey
 data class NightModeModel(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
-    val nightModeModel: Boolean
+    val nightMode: Boolean
 )

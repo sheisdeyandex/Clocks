@@ -2,19 +2,20 @@ package com.clock.clocks.data.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.clock.clocks.data.models.*
 
 @Dao
 interface SettingsDao {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertClockColor(clockColorModel: ClockColorModel)
     @Query("SELECT * FROM clockColorModel WHERE id=:id")
     fun getClockColor(id: Int): ClockColorModel
 
     @Query("SELECT * FROM clockColorModel ORDER BY id DESC LIMIT 1")
     fun getLastProductClockLive(): ClockColorModel
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertBackground(backgroundModel: BackgroundModel)
     @Query("SELECT * FROM backgroundModel WHERE id=:id")
     fun getBackgroundColor(id: Int): BackgroundModel
@@ -22,7 +23,7 @@ interface SettingsDao {
     @Query("SELECT * FROM backgroundModel ORDER BY id DESC LIMIT 1")
     fun getLastProductBackgroundLive(): BackgroundModel
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertClockFont(clockFontModel: ClockFontModel)
     @Query("SELECT * FROM clockFontModel WHERE id=:id")
     fun getClockFontModel(id: Int): ClockFontModel
@@ -30,7 +31,7 @@ interface SettingsDao {
     @Query("SELECT * FROM clockFontModel ORDER BY id DESC LIMIT 1")
     fun getLastProductClockFontModelLive(): ClockFontModel
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertClockOrientation(clockOrientation: ClockOrientation)
     @Query("SELECT * FROM clockOrientation WHERE id=:id")
     fun getClockOrientation(id: Int): ClockOrientation
@@ -39,7 +40,7 @@ interface SettingsDao {
     fun getLastProductCClockOrientationLive(): ClockOrientation
 
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertWhenPortraitModeModel (whenPortraitModeModel: WhenPortraitModeModel)
     @Query("SELECT * FROM whenPortraitModeModel WHERE id=:id")
     fun getWhenPortraitModeModel (id: Int): WhenPortraitModeModel
@@ -48,7 +49,7 @@ interface SettingsDao {
     fun getLastProductWhenPortraitModeModelLive(): WhenPortraitModeModel
 
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertUse24HourFormat (use24HourFormat: Use24HourFormat)
     @Query("SELECT * FROM use24HourFormat WHERE id=:id")
     fun getUse24HourFormat(id: Int): Use24HourFormat
@@ -57,7 +58,7 @@ interface SettingsDao {
     fun getLastProductUse24HourFormatLive(): Use24HourFormat
 
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertShowLeadingZeroForHoursModel (showLeadingZeroForHoursModel: ShowLeadingZeroForHoursModel)
     @Query("SELECT * FROM showLeadingZeroForHoursModel WHERE id=:id")
     fun getShowLeadingZeroForHoursModel(id: Int): ShowLeadingZeroForHoursModel
@@ -65,7 +66,7 @@ interface SettingsDao {
     @Query("SELECT * FROM showLeadingZeroForHoursModel ORDER BY id DESC LIMIT 1")
     fun getLastProductShowLeadingZeroForHoursModelLive(): ShowLeadingZeroForHoursModel
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertSeperatorStyleModel (seperatorStyleModel: SeperatorStyleModel)
     @Query("SELECT * FROM seperatorStyleModel WHERE id=:id")
     fun getSeperatorStyleModel(id: Int): SeperatorStyleModel
@@ -73,7 +74,7 @@ interface SettingsDao {
     @Query("SELECT * FROM seperatorStyleModel ORDER BY id DESC LIMIT 1")
     fun getLastProductSeperatorStyleModelLive(): SeperatorStyleModel
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertShowWeatherStyleInformationModel (showWeatherStyleInformationModel: ShowWeatherStyleInformationModel)
     @Query("SELECT * FROM showWeatherStyleInformationModel WHERE id=:id")
     fun getShowWeatherStyleInformationModel(id: Int): ShowWeatherStyleInformationModel
@@ -82,7 +83,7 @@ interface SettingsDao {
     fun getLastProductShowWeatherStyleInformationModelLive(): ShowWeatherStyleInformationModel
 
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertClockAppearanceModel (clockAppearanceModel: ClockAppearanceModel)
     @Query("SELECT * FROM clockAppearanceModel WHERE id=:id")
     fun getClockAppearanceModel(id: Int): ClockAppearanceModel
@@ -90,7 +91,7 @@ interface SettingsDao {
     @Query("SELECT * FROM clockAppearanceModel ORDER BY id DESC LIMIT 1")
     fun getLastProductClockAppearanceModelLive(): ClockAppearanceModel
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertShowSecondsModel (showSecondsModel: ShowSecondsModel)
     @Query("SELECT * FROM showSecondsModel WHERE id=:id")
     fun getShowSecondsModel (id: Int): ShowSecondsModel
@@ -98,7 +99,7 @@ interface SettingsDao {
     @Query("SELECT * FROM showSecondsModel ORDER BY id DESC LIMIT 1")
     fun getLastProductShowSecondsModelLive(): ShowSecondsModel
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertShowDateModel (showDateModel: ShowDateModel)
     @Query("SELECT * FROM showDateModel WHERE id=:id")
     fun getShowDateModel (id: Int): ShowDateModel
@@ -106,15 +107,15 @@ interface SettingsDao {
     @Query("SELECT * FROM showDateModel ORDER BY id DESC LIMIT 1")
     fun getLastProductShowDateModelLive(): ShowDateModel
 
-    @Insert
-    fun insertDateFormatModel (dateFormatModel: DateFormatModel)
-    @Query("SELECT * FROM dateFormatModel WHERE id=:id")
-    fun getDateFormatModel (id: Int): DateFormatModel
+//    @Insert
+//    fun insertDateFormatModel (dateFormatModel: DateFormatModel)
+//    @Query("SELECT * FROM dateFormatModel WHERE id=:id")
+//    fun getDateFormatModel (id: Int): DateFormatModel
+//
+//    @Query("SELECT * FROM dateFormatModel ORDER BY id DESC LIMIT 1")
+//    fun getLastProductDateFormatModelLive(): DateFormatModel
 
-    @Query("SELECT * FROM dateFormatModel ORDER BY id DESC LIMIT 1")
-    fun getLastProductDateFormatModelLive(): DateFormatModel
-
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertShowDayModel (showDayModel: ShowDayModel)
     @Query("SELECT * FROM showDayModel WHERE id=:id")
     fun getShowDayModel (id: Int): ShowDayModel
@@ -122,7 +123,7 @@ interface SettingsDao {
     @Query("SELECT * FROM showDayModel ORDER BY id DESC LIMIT 1")
     fun getLastProductShowDayModelLive(): ShowDayModel
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertShowDayNameModel (showDayNameModel: ShowDayNameModel)
     @Query("SELECT * FROM showDayNameModel WHERE id=:id")
     fun getShowDayNameModel (id: Int): ShowDayNameModel
@@ -130,7 +131,7 @@ interface SettingsDao {
     @Query("SELECT * FROM showDayNameModel ORDER BY id DESC LIMIT 1")
     fun getLastProductShowDayNameModelLive(): ShowDayNameModel
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertHideStatusBarModel (hideStatusBarModel: HideStatusBarModel)
     @Query("SELECT * FROM hideStatusBarModel WHERE id=:id")
     fun getHideStatusBarModel (id: Int): HideStatusBarModel
@@ -138,7 +139,7 @@ interface SettingsDao {
     @Query("SELECT * FROM hideStatusBarModel ORDER BY id DESC LIMIT 1")
     fun getLastProductHideStatusBarModelLive(): HideStatusBarModel
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAutomaticallyHideModel (automaticallyHideModel: AutomaticallyHideModel)
     @Query("SELECT * FROM automaticallyHideModel WHERE id=:id")
     fun getAutomaticallyHideModel (id: Int): AutomaticallyHideModel
@@ -146,7 +147,7 @@ interface SettingsDao {
     @Query("SELECT * FROM automaticallyHideModel ORDER BY id DESC LIMIT 1")
     fun getLastProductAutomaticallyHideModelLive(): AutomaticallyHideModel
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertSetLanguageModel (setLanguageModel: SetLanguageModel)
     @Query("SELECT * FROM setLanguageModel WHERE id=:id")
     fun getSetLanguageModel (id: Int): SetLanguageModel
@@ -154,7 +155,7 @@ interface SettingsDao {
     @Query("SELECT * FROM setLanguageModel ORDER BY id DESC LIMIT 1")
     fun getLastProductSetLanguageModelLive(): SetLanguageModel
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertNightModeModel (nightModeModel: NightModeModel)
     @Query("SELECT * FROM nightModeModel WHERE id=:id")
     fun getNightModeModel (id: Int): NightModeModel

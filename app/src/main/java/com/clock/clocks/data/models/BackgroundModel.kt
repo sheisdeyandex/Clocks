@@ -6,5 +6,6 @@ import androidx.room.PrimaryKey
 data class BackgroundModel(
     @PrimaryKey(autoGenerate = true)
     val id:Int,
-    val background:String
+    val background:String,
+    val name:String
 )
