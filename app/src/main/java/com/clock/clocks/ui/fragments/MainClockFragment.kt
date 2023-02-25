@@ -8,7 +8,6 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.clock.clocks.core.App
-import com.clock.clocks.databinding.FragmentMainBinding
 import com.clock.clocks.databinding.FragmentMainClockBinding
 import com.clock.clocks.ui.presentation.BaseFragment
 import com.clock.clocks.ui.presentation.Screens
@@ -35,12 +34,22 @@ class MainClockFragment :BaseFragment<FragmentMainClockBinding> (FragmentMainClo
                 viewModel.background = viewModel.getBackground().background
                 val font = viewModel.getClockFont()
                 viewModel.font = font.font
+                viewModel.whenInPortraitMode = viewModel.getWhenInPortraitMode().whenPortraitMode
                 viewModel.applyFontToClockOnly = font.applyToClockOnly
                 val use24HourFormat = viewModel.getUse24HourFormat()
                 viewModel.use24HourFormat  = use24HourFormat.use24HourFormat
                 viewModel.showAmAndPm = use24HourFormat.showAmAndPm
                 viewModel.showSeconds = viewModel.getShowSeconds().showSeconds
                 viewModel.showSeperator = viewModel.getSeperator().seperatorStyle
+                viewModel.showWeatherStyleInformation = viewModel.getShowWeatherStyleInformation().showWeatherStyleInformationModel
+                viewModel.showLeadingZeroForHours = viewModel.getShowLeadingZeroForHours().showLeadingZeroForHours
+                viewModel.clockAppearance = viewModel.getClockAppearance().clockAppearance
+                viewModel.nightMode = viewModel.getNightMode().nightMode
+                viewModel.showDate = viewModel.getShowDate().showDate
+                viewModel.showDay = viewModel.getShowDay().showDay
+                viewModel.showDayName = viewModel.getShowDayName().showDayNameModel
+                viewModel.hideStatusBar = viewModel.getHideStatusBar().hideStatusBarModel
+                viewModel.automaticallyHide = viewModel.getAutomaticallyHide().automaticallyHideModel
             }
             withContext(Dispatchers.Main){
             //    getSettings()
@@ -55,7 +64,26 @@ class MainClockFragment :BaseFragment<FragmentMainClockBinding> (FragmentMainClo
     }
     private fun initSettings(){
         binding.ivSettings.setOnClickListener {
-            App.INSTANCE.router.navigateTo(Screens.customClockSettingsFragment())
+            App.INSTANCE.router.navigateTo(Screens.customClockSettingsFragment(
+                viewModel.clockColorModel,
+                viewModel.backgroundModel,
+                viewModel.clockFontModel,
+                viewModel.clockOrientation,
+                viewModel.whenPortraitModeModel,
+                viewModel.use24HourFormatModel,
+                viewModel.showLeadingZeroForHoursModel,
+                viewModel.seperatorStyleModel,
+                viewModel.showWeatherStyleInformationModel,
+                viewModel.clockAppearanceModel,
+                viewModel.nightModeModel,
+                viewModel.showSecondsModel,
+                viewModel.showDateModel,
+                viewModel.showDayModel,
+                viewModel.showDayNameModel,
+                viewModel.hideStatusBarModel,
+                viewModel.automaticallyHideModel
+
+                ))
         }
     }
     private fun initBackground() {

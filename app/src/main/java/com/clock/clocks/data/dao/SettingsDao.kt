@@ -107,13 +107,13 @@ interface SettingsDao {
     @Query("SELECT * FROM showDateModel ORDER BY id DESC LIMIT 1")
     fun getLastProductShowDateModelLive(): ShowDateModel
 
-//    @Insert
-//    fun insertDateFormatModel (dateFormatModel: DateFormatModel)
-//    @Query("SELECT * FROM dateFormatModel WHERE id=:id")
-//    fun getDateFormatModel (id: Int): DateFormatModel
-//
-//    @Query("SELECT * FROM dateFormatModel ORDER BY id DESC LIMIT 1")
-//    fun getLastProductDateFormatModelLive(): DateFormatModel
+    @Insert
+    fun insertDateFormatModel (dateFormatModel: DateFormatModel)
+    @Query("SELECT * FROM dateFormatModel WHERE id=:id")
+    fun getDateFormatModel (id: Int): DateFormatModel
+
+    @Query("SELECT * FROM dateFormatModel ORDER BY id DESC LIMIT 1")
+    fun getLastProductDateFormatModelLive(): DateFormatModel
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertShowDayModel (showDayModel: ShowDayModel)

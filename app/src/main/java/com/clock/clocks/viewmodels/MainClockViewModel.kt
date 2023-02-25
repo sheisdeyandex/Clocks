@@ -8,7 +8,6 @@ import com.clock.clocks.data.models.*
 import com.clock.clocks.domain.IntegerToHexColor
 import com.clock.clocks.usecases.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
-import java.sql.Struct
 import javax.inject.Inject
 
 @HiltViewModel
@@ -18,37 +17,77 @@ class MainClockViewModel @Inject constructor(val settingsDao: SettingsDao): View
     lateinit var background:String
     var applyFontToClockOnly:Boolean = false
     var font:Int = R.font.font
+    var orientation=Constants.automatic
+    var whenInPortraitMode = false
     var use24HourFormat:Boolean = true
+    var showLeadingZeroForHours:Boolean = true
     var showSeperator:Boolean = true
+    var showWeatherStyleInformation: Boolean = false
+    var clockAppearance: Boolean = false
+    var nightMode: Boolean = false
     var showAmAndPm:Boolean = true
     var showSeconds:Boolean = true
+    var showDate:Boolean = false
+    var showDay: Boolean = false
+    var showDayName: Boolean = false
+    var hideStatusBar: Boolean = true
+    var automaticallyHide: Boolean = false
+    lateinit var clockColorModel: ClockColorModel
+    lateinit var backgroundModel: BackgroundModel
+    lateinit var clockFontModel: ClockFontModel
+    lateinit var clockOrientation: ClockOrientation
+    lateinit var whenPortraitModeModel: WhenPortraitModeModel
+    lateinit var use24HourFormatModel: Use24HourFormat
+    lateinit var showLeadingZeroForHoursModel: ShowLeadingZeroForHoursModel
+    lateinit var seperatorStyleModel: SeperatorStyleModel
+    lateinit var showWeatherStyleInformationModel: ShowWeatherStyleInformationModel
+    lateinit var clockAppearanceModel: ClockAppearanceModel
+    lateinit var nightModeModel: NightModeModel
+    lateinit var showSecondsModel: ShowSecondsModel
+    lateinit var showDateModel: ShowDateModel
+    lateinit var showDayModel: ShowDayModel
+    lateinit var showDayNameModel: ShowDayNameModel
+    lateinit var hideStatusBarModel: HideStatusBarModel
+    lateinit var automaticallyHideModel: AutomaticallyHideModel
+
+
     fun insertAllDatabase(context:Context){
         settingsDao.insertClockColor(ClockColorModel(id = 0, clockColor = IntegerToHexColor.toHex(R.color.red,context),context.getString(R.string.red)))
         settingsDao.insertBackground(BackgroundModel(id = 0, background = IntegerToHexColor.toHex(R.color.black,context),context.getString(R.string.black)))
         settingsDao.insertClockFont(ClockFontModel(id = 0,R.font.roboto,context.getString(R.string.default_name),false))
         settingsDao.insertClockOrientation(ClockOrientation(id=0,Constants.automatic))
+        settingsDao.insertWhenPortraitModeModel(WhenPortraitModeModel(id=0,true))
         settingsDao.insertUse24HourFormat(Use24HourFormat(id=0,
             use24HourFormat = true,
             showAmAndPm = true))
-        settingsDao.insertShowWeatherStyleInformationModel(ShowWeatherStyleInformationModel(id=0,false))
-        settingsDao.insertClockAppearanceModel(ClockAppearanceModel(id = 0,false))
-        settingsDao.insertNightModeModel(NightModeModel(id=0,false))
+        settingsDao.insertShowLeadingZeroForHoursModel(ShowLeadingZeroForHoursModel(id=0,true))
         settingsDao.insertSeperatorStyleModel(SeperatorStyleModel(id = 0,
             seperatorStyle = true,
             showSeperatorWhenInLandScape = false,
             showSeperatorWhenInPortrait = false))
-        settingsDao.insertShowDateModel(ShowDateModel(id = 0,false))
-        settingsDao.insertShowDayModel(ShowDayModel(id = 0,false))
+        settingsDao.insertShowWeatherStyleInformationModel(ShowWeatherStyleInformationModel(id=0,false))
+        settingsDao.insertClockAppearanceModel(ClockAppearanceModel(id = 0,false))
+        settingsDao.insertNightModeModel(NightModeModel(id=0,false))
         settingsDao.insertShowSecondsModel(ShowSecondsModel(id = 0,true))
+        settingsDao.insertShowDateModel(ShowDateModel(id = 0,false))
+  //      settingsDao.insertDateFormatModel(DateFormatModel(id = ))
+        settingsDao.insertShowDayModel(ShowDayModel(id = 0,false))
+        settingsDao.insertShowDayNameModel(ShowDayNameModel(id=0,false))
+        settingsDao.insertHideStatusBarModel(HideStatusBarModel(id=0,true))
+        settingsDao.insertAutomaticallyHideModel(AutomaticallyHideModel(id=0,false))
     }
     fun getClockColor():ClockColorModel{
-        return settingsDao.getClockColor(settingsDao.getLastProductClockLive().id)
+        clockColorModel =settingsDao.getClockColor(settingsDao.getLastProductClockLive().id)
+        return clockColorModel
     }
     fun getBackground():BackgroundModel{
         return settingsDao.getBackgroundColor(settingsDao.getLastProductClockLive().id)
     }
     fun getClockFont():ClockFontModel{
         return settingsDao.getClockFontModel(settingsDao.getLastProductClockLive().id)
+    }
+    fun getWhenInPortraitMode():WhenPortraitModeModel{
+        return settingsDao.getWhenPortraitModeModel(settingsDao.getLastProductClockLive().id)
     }
     fun getUse24HourFormat():Use24HourFormat{
         return settingsDao.getUse24HourFormat(settingsDao.getLastProductClockLive().id)
@@ -59,6 +98,34 @@ class MainClockViewModel @Inject constructor(val settingsDao: SettingsDao): View
     fun getShowSeconds():ShowSecondsModel{
         return settingsDao.getShowSecondsModel(settingsDao.getLastProductClockLive().id)
     }
+    fun getShowWeatherStyleInformation():ShowWeatherStyleInformationModel{
+        return settingsDao.getShowWeatherStyleInformationModel(settingsDao.getLastProductClockLive().id)
+    }
+    fun getShowLeadingZeroForHours():ShowLeadingZeroForHoursModel{
+        return settingsDao.getShowLeadingZeroForHoursModel(settingsDao.getLastProductClockLive().id)
+    }
+    fun getClockAppearance():ClockAppearanceModel{
+        return settingsDao.getClockAppearanceModel(settingsDao.getLastProductClockLive().id)
+    }
+    fun getNightMode():NightModeModel{
+        return settingsDao.getNightModeModel(settingsDao.getLastProductClockLive().id)
+    }
+    fun getShowDate():ShowDateModel{
+        return settingsDao.getShowDateModel(settingsDao.getLastProductClockLive().id)
+    }
+    fun getShowDay():ShowDayModel{
+        return settingsDao.getShowDayModel(settingsDao.getLastProductClockLive().id)
+    }
+    fun getShowDayName():ShowDayNameModel{
+        return settingsDao.getShowDayNameModel(settingsDao.getLastProductClockLive().id)
+    }
+    fun getHideStatusBar():HideStatusBarModel{
+        return settingsDao.getHideStatusBarModel(settingsDao.getLastProductClockLive().id)
+    }
+    fun getAutomaticallyHide():AutomaticallyHideModel{
+        return settingsDao.getAutomaticallyHideModel(settingsDao.getLastProductClockLive().id)
+    }
+
 //    fun generateColor(context: Context) {
 //        settingsDao.insertClockColor(ClockColorModel(id = 0, clockColor = (R.color.red).toString(),context.getString(R.string.red)))
 //    }

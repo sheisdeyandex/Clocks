@@ -6,6 +6,7 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.clock.clocks.R
+import com.clock.clocks.data.models.*
 import com.clock.clocks.databinding.FragmentCustomClockSettingsBinding
 import com.clock.clocks.domain.IBackgroundColor
 import com.clock.clocks.domain.IClockColor
@@ -23,7 +24,24 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
-class CustomClockSettingsFragment : BaseFragment<FragmentCustomClockSettingsBinding>(FragmentCustomClockSettingsBinding::inflate),IClockColor,IBackgroundColor,IFont,IClockOrientation {
+class CustomClockSettingsFragment(val clockColor:ClockColorModel,
+                                  val background:BackgroundModel,
+                                  val clockFontModel: ClockFontModel,
+                                  val clockOrientation: ClockOrientation,
+                                  val whenPortraitModeModel: WhenPortraitModeModel,
+                                  val use24HourFormat: Use24HourFormat,
+                                  val showLeadingZeroForHoursModel: ShowLeadingZeroForHoursModel,
+                                  val seperatorStyleModel: SeperatorStyleModel,
+                                  val showWeatherStyleInformationModel: ShowWeatherStyleInformationModel,
+                                  val clockAppearanceModel: ClockAppearanceModel,
+                                  val nightModeModel: NightModeModel,
+                                  val showSecondsModel: ShowSecondsModel,
+                                  val showDateModel:ShowDateModel,
+                                  val showDayModel: ShowDayModel,
+                                  val showDayNameModel: ShowDayNameModel,
+                                  val hideStatusBarModel: HideStatusBarModel,
+                                  val automaticallyHideModel: AutomaticallyHideModel,
+                                  ) : BaseFragment<FragmentCustomClockSettingsBinding>(FragmentCustomClockSettingsBinding::inflate),IClockColor,IBackgroundColor,IFont,IClockOrientation {
     private val viewModel: CustomClockSettingsViewModel by lazy {
         ViewModelProvider(requireActivity())[CustomClockSettingsViewModel::class.java]
     }
@@ -39,7 +57,6 @@ class CustomClockSettingsFragment : BaseFragment<FragmentCustomClockSettingsBind
     private val dialogClockOrientation by lazy {
         DialogClockOrientation(this)
     }
-    private lateinit var clockColor:String
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initClicks()
