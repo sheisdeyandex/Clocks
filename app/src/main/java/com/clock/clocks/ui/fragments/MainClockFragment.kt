@@ -7,9 +7,11 @@ import android.view.View
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
+import com.clock.clocks.core.App
 import com.clock.clocks.databinding.FragmentMainBinding
 import com.clock.clocks.databinding.FragmentMainClockBinding
 import com.clock.clocks.ui.presentation.BaseFragment
+import com.clock.clocks.ui.presentation.Screens
 import com.clock.clocks.usecases.DateConvertor
 import com.clock.clocks.viewmodels.MainClockViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -42,6 +44,7 @@ class MainClockFragment :BaseFragment<FragmentMainClockBinding> (FragmentMainClo
             }
             withContext(Dispatchers.Main){
             //    getSettings()
+                initSettings()
                 initDate()
                 initBackground()
                 initClock()
@@ -49,6 +52,11 @@ class MainClockFragment :BaseFragment<FragmentMainClockBinding> (FragmentMainClo
         }
 
 
+    }
+    private fun initSettings(){
+        binding.ivSettings.setOnClickListener {
+            App.INSTANCE.router.navigateTo(Screens.customClockSettingsFragment())
+        }
     }
     private fun initBackground() {
         binding.clMain.setBackgroundColor( Color.parseColor(viewModel.background))

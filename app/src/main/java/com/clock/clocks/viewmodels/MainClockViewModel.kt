@@ -28,7 +28,7 @@ class MainClockViewModel @Inject constructor(val settingsDao: SettingsDao): View
         settingsDao.insertClockFont(ClockFontModel(id = 0,R.font.roboto,context.getString(R.string.default_name),false))
         settingsDao.insertClockOrientation(ClockOrientation(id=0,Constants.automatic))
         settingsDao.insertUse24HourFormat(Use24HourFormat(id=0,
-            use24HourFormat = false,
+            use24HourFormat = true,
             showAmAndPm = true))
         settingsDao.insertShowWeatherStyleInformationModel(ShowWeatherStyleInformationModel(id=0,false))
         settingsDao.insertClockAppearanceModel(ClockAppearanceModel(id = 0,false))
